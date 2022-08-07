@@ -1,0 +1,43 @@
+.img-55{
+border: 1px solid #d2d6de;
+border-radius: 50%;
+display: inline;
+width: 4rem;
+height: 4rem;
+border: none;
+}
+.img-profile{
+  border: 1px solid #d2d6de;
+  border-radius: 50%;
+  display: inline;
+  width: 3.4rem;
+  height: 3.4rem;
+}
+.form-group {
+    margin-bottom: 0.3rem;
+    }
+    .add_image_preview, .edit_image_preview, .profile_image_preview{
+    background-size: 100% 100%;
+    border: none;
+    }
+    .profile_image_preview {
+      background:url('{{asset("storage/image/$image") }}');
+      background-size: 100% 100%;
+      margin: 0 80px 0 80px;
+      }
+    th{
+      font-size: 0.8rem;
+    }
+    .dataTables_scrollBody {
+        transform:rotateX(180deg);
+    }
+    .dataTables_scrollBody table {
+        transform:rotateX(180deg);
+    }.mid{
+      vertical-align: middle!important;
+    }.td-limit {
+        max-width: 200px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+}
