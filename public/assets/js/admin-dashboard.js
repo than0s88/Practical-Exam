@@ -197,7 +197,6 @@ $(document).ready(function(){
 
 
             //START EDIT FUNCTION PREVIEW
-
             $(document).on("change", ".edit_user_image", function () {
                 var uploadFile = $(this);
                 var files = !!this.files ? this.files : [];

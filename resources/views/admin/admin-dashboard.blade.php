@@ -36,7 +36,15 @@ background-size: 100% 100%;
               <div class="btn-group" id="divAddNew">
                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-add"><i class="fa fa-fw fa-plus"></i><span class="hide-on-mobile">&nbsp;&nbsp;Add User</span></button>
               </div>
-              
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
             <!-- /.card-header -->
             <div class="card-body text-sm" style="overflow: auto; margin-top: 0px;">
               <table id="table-computer" class="table table-bordered dataTable">

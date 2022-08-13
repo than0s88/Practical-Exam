@@ -95,9 +95,6 @@
 <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Toastr -->
 <script src="{{ asset('assets/plugins/toastr/toastr.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('assets/dist/js/adminlte.js')}}"></script>
-
 
 <script>var SITE_URL = "{{URL::to('/')}}";</script>
 <script src="{{ asset('assets/js/admin-layout.js') }}"></script>

@@ -7,6 +7,7 @@
         </p>
       </div>
       <form method="post" id="form-add" enctype="multipart/form-data">
+        {{-- <form method="post" action="{{ route('add-user')}}" id="form-add" enctype="multipart/form-data"> --}}
         @csrf
         <div class="modal-body">
           <!-- BEGIN FORM-->
@@ -72,6 +73,7 @@
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger" id="btn-add">Save</button>
+                {{-- <button type="submit" class="btn btn-danger">Save</button> --}}
               </div>
             </form>
           </div>

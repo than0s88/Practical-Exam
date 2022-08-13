@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -16,23 +18,8 @@ class AdminController extends Controller
         return view('admin.admin-dashboard')->with('user',$user);
     }//END FUNCTION
 
-    public function addUser(Request $request){
-
-        $rules = array(
-            'role' => 'required',
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$request->email,
-            'password' => 'required|min:8',
-            'image'=>'image|nullable'
-        );
-   
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
+    public function addUser(AddUserRequest $request){
+        
         if($request->hasFile('image')){
         
         $filename=str_replace(" ","-", $request->name);
@@ -54,23 +41,7 @@ class AdminController extends Controller
         return response()->json();
     }//END FUNCTION
 
-    public function updateUser(Request $request){
-        $id = Auth::user()->id;
-
-        $rules = array(
-        'image'=>'image|nullable',
-        'role' => 'required',
-        'name' => 'required',
-        'email' => 'unique:users,email,'.$request->id,
-        'password' => 'min:8|nullable',
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
+    public function updateUser(UpdateUserRequest $request, User $user){
 
         $data = array();
 
@@ -81,7 +52,7 @@ class AdminController extends Controller
             $request->file('image')->storeAs('public/image/',$image);  
         }
 
-        if($request->password != null || $request->password !=""){
+        if(!empty($request->password)){
             $data['password'] = Hash::make($request->password);
         }
 

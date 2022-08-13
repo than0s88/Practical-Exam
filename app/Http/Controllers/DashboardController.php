@@ -10,15 +10,13 @@ use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-
-
     public function userDashboard(){
 
         return view('user.user-dashboard');
     }//END FUNCTION
 
     public function updateProfile(Request $request){
-        $id = Auth::user()->id;
+      
 
         $rules = array(
         'image'=>'image|nullable',
