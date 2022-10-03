@@ -18,18 +18,26 @@ class AdminController extends Controller
         return view('admin.admin-dashboard')->with('user',$user);
     }//END FUNCTION
 
-    public function addUser(AddUserRequest $request){
-        
+
+    public function addImage($request){
+
         if($request->hasFile('image')){
-        
-        $filename=str_replace(" ","-", $request->name);
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $image=$filename.'.'.$extension;
-        $request->file('image')->storeAs('public/image/',$image);
+
+            $filename=str_replace(" ","-", $request->name);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $image=$filename.'.'.$extension;
+            $request->file('image')->storeAs('public/image/',$image);
+
         }else{
-        $image="no-image.png";
+            $image="no-image.png";
         }
 
+        return $image;
+    }
+
+    public function addUser(AddUserRequest $request){
+
+        $image = AdminController::addImage($request);
         User::create([
             'image' => $image,
             'role' => $request->role,
@@ -49,7 +57,7 @@ class AdminController extends Controller
             $filename=str_replace(" ","-", $request->name);
             $extension = $request->file('image')->getClientOriginalExtension();
             $data['image'] = $image=$filename.'.'.$extension;
-            $request->file('image')->storeAs('public/image/',$image);  
+            $request->file('image')->storeAs('public/image/',$image);
         }
 
         if(!empty($request->password)){

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -26,11 +27,11 @@ class UpdateUserRequest extends FormRequest
 
     public function rules()
     {
-    
+
         return [
             'role' => 'required',
             'name' => 'required',
-            'email' => 'required|email|unique:users, email, {$this->user->id}',
+            'email' => 'required|email|unique:users,email,'.$this->user->id,
             'password' => 'nullable|min:8',
             'image'=>'image|nullable'
         ];
@@ -44,9 +45,9 @@ class UpdateUserRequest extends FormRequest
          $response = response()->json([
             'success' => true,
             'errors' => $validator->errors()->all()
-         ]);        
+         ]);
      }
-        
+
      throw (new ValidationException($validator, $response))
         ->errorBag($this->errorBag)
         ->redirectTo($this->getRedirectUrl());

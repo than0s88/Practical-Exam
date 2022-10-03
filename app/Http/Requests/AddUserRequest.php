@@ -13,7 +13,7 @@ class AddUserRequest extends FormRequest
      *
      * @return bool
      */
-    
+
     public function authorize()
     {
         return true;
@@ -27,13 +27,13 @@ class AddUserRequest extends FormRequest
 
     public function rules()
     {
-    
+
         return [
             'role' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'image'=>'image|nullable'
+            'image'=> 'image|nullable'
         ];
 
     }
@@ -45,9 +45,9 @@ class AddUserRequest extends FormRequest
          $response = response()->json([
             'success' => true,
             'errors' => $validator->errors()->all()
-         ]);        
+         ]);
      }
-        
+
      throw (new ValidationException($validator, $response))
         ->errorBag($this->errorBag)
         ->redirectTo($this->getRedirectUrl());
