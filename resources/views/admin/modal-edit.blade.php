@@ -26,7 +26,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <input class="form-control" required name="id" id="id" type="hidden">
+                <input type="hidden" class="form-control" required name="id" id="id">
               </div>
             </div>
         </div> <!-- END ROW-->
@@ -57,7 +57,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="item_category">Email</label>
-                        <input  type="text" class="form-control" name="email" id="email">
+                        <input  type="email" class="form-control" name="email" id="email">
                       </div>
                     </div>
                    </div> <!-- END ROW-->
@@ -68,13 +68,13 @@
                         <input type="password" class="form-control" name="password" id="password">
                       </div>
                     </div>
-                   </div> 
+                   </div>
                    <!-- END ROW-->
-              </div> 
+              </div>
               <!-- END FORM-->
                 <!--Footer-->
               </div>
-                   </div> 
+                   </div>
                    <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-danger" id="btn-edit">Update</button>

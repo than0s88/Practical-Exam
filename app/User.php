@@ -17,9 +17,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
-    public function hasRole($role)
-    {
-        return User::where('role', $role)->get();
+
+    public function uploadImage($request){
+
+        if($request->hasFile('image')){
+
+            $filename=str_replace(" ","-", $request->name);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $image=$filename.'.'.$extension;
+            $request->file('image')->storeAs('public/image/',$image);
+
+        }else{
+            $image="no-image.png";
+        }
+
+        return $image;
     }
+
+
+
 }

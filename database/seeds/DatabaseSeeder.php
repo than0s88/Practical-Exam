@@ -11,15 +11,18 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        // $this->call(UserSeeder::class);
-        DB::table('users')->insert([
-            'role' => 'Admin',
-            'image' => 'no-image.png',
-            'name' => 'Paulo',
-            'email' => 'paulo@gmail.com',
-            'password' => Hash::make('password'),
-        ]);
+         $this->call([
+             UserSeeder::class
+         ]);
+//        DB::table('users')->insert([
+//            'role' => 'Admin',
+//            'image' => 'no-image.png',
+//            'name' => 'Paulo',
+//            'email' => 'paulo@gmail.com',
+//            'password' => Hash::make('password'),
+//        ]);
     }
 }

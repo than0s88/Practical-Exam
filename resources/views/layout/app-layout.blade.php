@@ -39,7 +39,7 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu" style="padding-top: 6px;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            {{Auth::user()->name}}
+                            {{auth()->user()->name}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="margin-top: 12px;">
                             <a href="#" class="dropdown-item" style="padding-top: 20px;">
@@ -47,9 +47,9 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <h3 class="dropdown-item-title black">
-                                            {{Auth::user()->name}}
+                                            {{auth()->user()->name}}
                                         </h3>
-                                        <p class="text-sm black">{{Auth::user()->role}}</p>
+                                        <p class="text-sm black">{{auth()->user()->role}}</p>
                                     </div>
                                 </div>
                                 <!-- Message End -->

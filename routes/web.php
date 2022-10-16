@@ -23,11 +23,10 @@ Auth::routes();
 //ADMIN MIDDLEWARE
 Route::group(['middleware' => ['admin.auth','prevent.back']], function()
 {
-    Route::get('/admin/dashboard','AdminController@adminDashboard');
-    Route::post('/user/add','AdminController@addUser');
-    Route::post('/user/update','AdminController@updateUser');
-    Route::post('/user/delete','AdminController@deleteUser');
-    
+    Route::get('/dashboard', 'AdminController@index');
+    Route::post('/user-add','AdminController@store');
+    Route::post('/user-update','AdminController@update');
+    Route::delete('/user-delete','AdminController@destroy');
 });
 
 //USER MIDDLEWARE

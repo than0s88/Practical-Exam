@@ -4,69 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $user = User::all();
+        //return view('admin.admin-dashboard',compact('user'));
+        return new UserCollection($user);
+    }
 
-    public function adminDashboard(){
-        $user = User::all()->except(Auth::user()->id);
-        return view('admin.admin-dashboard')->with('user',$user);
-    }//END FUNCTION
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
-    public function addUser(AddUserRequest $request){
-        
-        if($request->hasFile('image')){
-        
-        $filename=str_replace(" ","-", $request->name);
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $image=$filename.'.'.$extension;
-        $request->file('image')->storeAs('public/image/',$image);
-        }else{
-        $image="no-image.png";
-        }
-
-        User::create([
-            'image' => $image,
-            'role' => $request->role,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(AddUserRequest $request)
+    {
+        $user = new User();
+        $data = $request->validated();
+        $data['image'] = $user->uploadImage($request);
+        $data['password'] = Hash::make($request->input('password'));
+        $user->create($data);
 
         return response()->json();
-    }//END FUNCTION
+    }
 
-    public function updateUser(UpdateUserRequest $request, User $user){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateUserRequest $request)
+    {
+        $user = new User();
+        $data = $request->validated();
+        $data['image'] = $user->uploadImage($request);
+        $data['password'] = Hash::make($request->password);
+        $user->update($data);
 
-        $data = array();
-
-        if($request->hasFile('image')){
-            $filename=str_replace(" ","-", $request->name);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $data['image'] = $image=$filename.'.'.$extension;
-            $request->file('image')->storeAs('public/image/',$image);  
-        }
-
-        if(!empty($request->password)){
-            $data['password'] = Hash::make($request->password);
-        }
-
-        $data['role'] = $request->role;
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        User::where('id',$request->id)->update($data);
         return response()->json();
-    }//END FUNCTION
+    }
 
-    public function deleteUser(Request $request){
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
         User::where('id',$request->id)->delete();
         return response()->json();
-
-    }//END FUNCTION
+    }
 }

@@ -20,9 +20,9 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             if(Auth::user()->role=="Admin"){
-                return redirect('admin/dashboard');
+                return redirect('admin');
             }else{
-                return redirect('user/dashboard');
+                return redirect('user');
             }
         }
 

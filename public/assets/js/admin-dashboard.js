@@ -6,7 +6,7 @@ $(document).ready(function(){
             var form = $('#form-add')[0];
             var data = new FormData(form);
             $.ajax({
-                url: SITE_URL + '/user/add',
+                url: SITE_URL + '/user-add',
                 beforeSend: function () {
                     $('#btn-add').text('Submitting...');
                 },
@@ -54,8 +54,9 @@ $(document).ready(function(){
             event.preventDefault();
             var form = $('#form-edit')[0];
             var data = new FormData(form);
+            var id = $('#delete_id').val();
             $.ajax({
-                url: SITE_URL + '/user/update',
+                url: SITE_URL + '/user-update',
                 beforeSend: function () {
                     $('#btn-edit').text('Submitting...');
                 },
@@ -103,11 +104,11 @@ $(document).ready(function(){
         $("button.btn-delete-single-confirm").click(function () {
             var id = $('#delete_id').val();
             $.ajax({
-                url: SITE_URL + '/user/delete',
+                url: SITE_URL + '/user-delete',
                 beforeSend: function () {
                     $('.btn-delete-single-confirm').text('Deleting...');
                 },
-                type: 'POST',
+                type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -197,6 +198,7 @@ $(document).ready(function(){
 
 
             //START EDIT FUNCTION PREVIEW
+
             $(document).on("change", ".edit_user_image", function () {
                 var uploadFile = $(this);
                 var files = !!this.files ? this.files : [];

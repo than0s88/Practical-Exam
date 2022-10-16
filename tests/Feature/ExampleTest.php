@@ -2,20 +2,20 @@
 
 namespace Tests\Feature;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\User;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+    public function test_admin_dashboard_page()
     {
-        $response = $this->get('/');
+        //$user = factory(User::class)->make();
+        //$user = User::factory()->create();
+        $this->assertAuthenticated();
+        $reponse = $this->get('/admin/dashboard');
 
-        $response->assertStatus(200);
+        $reponse->assertStatus(200);
     }
 }

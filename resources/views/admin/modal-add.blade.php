@@ -6,8 +6,7 @@
         <p class="heading lead"><strong>Add User</strong>
         </p>
       </div>
-      <form method="post" id="form-add" enctype="multipart/form-data">
-        {{-- <form method="post" action="{{ route('add-user')}}" id="form-add" enctype="multipart/form-data"> --}}
+      <form id="form-add" name="form-add" method="post">
         @csrf
         <div class="modal-body">
           <!-- BEGIN FORM-->
@@ -63,9 +62,9 @@
                         <input type="password" class="form-control" name="password" id="password">
                       </div>
                     </div>
-                   </div> 
+                   </div>
                    <!-- END ROW-->
-              </div> 
+              </div>
               <!-- END FORM-->
                 <!--Footer-->
               </div>
